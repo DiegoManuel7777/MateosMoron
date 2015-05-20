@@ -16,32 +16,6 @@ int powerball_computer_generated()
 return rand()%MAX_POWER_BALL+1;
 }
 
-void lottery_numbers_simulation(){
-	int premiadas[6];
-
-	int i, j;	
-	for(i = 0; i < 5; i++){
-		premiadas[i] = whiteballs_computer_generated();
-		
-		for(j = 0; j < i; j++){
-			if(premiadas[j] == premiadas[i]){
-				premiadas[i] = whiteballs_computer_generated();
-			    j = -1;
-			}
-		}
-	}
-
-
-	premiadas[5] = powerball_computer_generated();
-
-	printf("Bolas premiadas: \n");
-	for(i = 0; i < 6; i++){
-		if(i == 5)
-			printf("PowerBall: ");
-		printf("%d ", premiadas[i]);
-	}
-}
-
 void checkwhiteballs(int balls[5], int control) {
     int last = balls[control];
     for (int i = 0; i < control; i++){
@@ -88,6 +62,22 @@ int calculate_result(int white_balls[5], int power_ball)
     qsort(white_balls,5,sizeof(int),my_sort_func);
     // Here should be typed a function to calculate the probability
   return 0;
+}
+
+void lottery_numbers_simulation(){
+	int white_balls[5];
+	int power_ball = powerball_computer_generated();
+
+	printf("Bolas blancas.\n");
+
+	for(int i = 0; i < 5;i++)
+	{
+		white_balls[i] = whiteballs_computer_generated();
+		checkwhiteballs(white_balls,i);
+
+		printf("%d ", white_balls[i]);
+	}
+	printf("\nPowerball:\n%d \n", power_ball);
 }
 
 int main(int argc, char** argv)
@@ -137,7 +127,7 @@ printf(" %d\n", balls[5]);
     
     // the power ball is always the last one given
      int power_ball = balls[5];
-	 lottery_numbers_simulation();
+     lottery_numbers_simulation();
      int result = calculate_result(balls, power_ball);
 
     // calculate result can return -1 if the ball numbers
