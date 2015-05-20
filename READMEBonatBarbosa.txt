@@ -1,0 +1,1 @@
+Este es el entorno de trabajo del equipo BonatBarbosa, donde trabajan los alumnos : Iván Barbosa y Manuel Bonat, en el que almacenarán los ficheros de la clase de prácticas de la asignatura Evolución de Software
