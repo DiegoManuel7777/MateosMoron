@@ -44,20 +44,32 @@ static int my_sort_func(const void* p1, const void* p2)
 	}
 }
 
-int calculate_result(int white_balls[5], int power_ball)
+int calculate_result(int white_balls[5], int power_ball, int lott[])
 {
+<<<<<<< HEAD
 		// Percent white balls
+=======
+        int aciertos = 0;
+>>>>>>> f49cfd32c74cc94741f8b1e4caebf552e491adf1
 		for (int i=0; i<5; i++)
 	{
-			if ((white_balls[i] < 1) || (white_balls[i] > MAX_WHITE_BALL))
-	{
-			return -1;
+			if ((white_balls[i] < 1) || (white_balls[i] > MAX_WHITE_BALL)){
+			    aciertos++;
+	        }
 	}
-	}
+<<<<<<< HEAD
 		// Percent power ball
+=======
+	
+	
+	
+>>>>>>> f49cfd32c74cc94741f8b1e4caebf552e491adf1
 		if ((power_ball < 1) || (power_ball > MAX_POWER_BALL))
 	{
-			return -1;
+			return (2*aciertos/10) + 0.1;
+	}
+	else{
+	    return 2*aciertos/10;
 	}
 	
 	// lottery ball numbers are always shown sorted
@@ -77,7 +89,7 @@ void showing_results(int white_balls[5], int power_ball)
 		printf("The power ball: %d \n", power_ball);
 }
 
-void lottery_numbers_simulation(){
+void lottery_numbers_simulation(int lott[]){
 		int white_balls[5];
 		int power_ball = powerball_computer_generated();
 
@@ -100,6 +112,7 @@ int main(int argc, char** argv)
 {
 	int balls[6];
 		int count_balls = 0;
+		int lott[6];
 		bool favourite = false;    //this should be a bool
 		
 		for (int i=1; i<argc; i++)
@@ -163,7 +176,12 @@ printf(" %d\n", balls[5]);
 
 		//Head for the lottery numbers
 		printf("\n--- The lottery numbers ---\n");
-	lottery_numbers_simulation();
+	lottery_numbers_simulation(lott);
+	int result = calculate_result(balls, power_ball);
+	showing_results(balls, power_ball);
+    if (result < 0){
+        goto usage_error;
+    }
 	printf("%d percent chance of winning\n", result);
 	return 0;
 	
