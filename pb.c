@@ -46,6 +46,7 @@ static int my_sort_func(const void* p1, const void* p2)
 
 int calculate_result(int white_balls[5], int power_ball)
 {
+		// Percent white balls
 		for (int i=0; i<5; i++)
 	{
 			if ((white_balls[i] < 1) || (white_balls[i] > MAX_WHITE_BALL))
@@ -53,6 +54,7 @@ int calculate_result(int white_balls[5], int power_ball)
 			return -1;
 	}
 	}
+		// Percent power ball
 		if ((power_ball < 1) || (power_ball > MAX_POWER_BALL))
 	{
 			return -1;
@@ -85,6 +87,9 @@ void lottery_numbers_simulation(){
 		{
 	white_balls[i] = whiteballs_computer_generated();
 	checkwhiteballs(white_balls,i);
+
+	//Sort the lottery numbers.
+	qsort(white_balls,5,sizeof(int),my_sort_func);
 
 	printf("%d ", white_balls[i]);
 		}
@@ -155,6 +160,8 @@ printf(" %d\n", balls[5]);
 	{
 			result = result * 2;
 		}
+
+		//Head for the lottery numbers
 		printf("\n--- The lottery numbers ---\n");
 	lottery_numbers_simulation();
 	printf("%d percent chance of winning\n", result);
